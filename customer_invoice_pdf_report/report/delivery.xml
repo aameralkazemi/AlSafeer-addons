@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+
+        <!--        Customer Invoice-->
+        <report
+                id="report_account_deliverys_custom"
+                model="stock.picking"
+                string="SO Print"
+                report_type="qweb-pdf"
+                name="customer_invoice_pdf_report.custom_icon_delivery"
+                file="customer_invoice_pdf_report.custom_icon_delivery"
+                menu="True"
+                print_report_name="'Picking Operations - %s - %s' % (object.partner_id.name or '', object.name)"
+        />
+
+        <record id="report_account_deliverys_custom" model="ir.actions.report">
+            <field name="paperformat_id" ref="paperformat_euro_delivery"/>
+        </record>
+
+
+    </data>
+</odoo>

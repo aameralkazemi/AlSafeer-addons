@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="sltech_delivery_body">
+            <div class="cus_en">
+                <style>
+                    .sltech-box-class{
+                        border: 1px solid black;
+                    }
+                </style>
+                <table style="width: 100%" >
+                    <!--
+                    <tr>
+                        <td  colspan="8">
+                            <span>VAT#</span>
+                            <span>
+                                <t t-esc="o.company_id.vat"/>
+                            </span>
+                        </td>
+                        <td  colspan="8"/>
+                        <td style="text-align: right"  colspan="4">
+                            <span>
+                                <t t-esc="o.company_id.vat"/>
+                            </span>
+                                <span>الرقم الضريبي</span>
+                        </td>
+                    </tr>
+                    -->
+                    <tr>
+                        <td  colspan="4"/>
+                        <td colspan="3">
+                            <h3 style="text-align: center;font-weght: bold">DELIVERY NOTE</h3>
+                        </td>
+                        <td colspan="3"/>
+                        <td colspan="3">
+                            <h3 style="font-weght: bold">
+                                <t t-esc="o.name"/>
+                            </h3>
+                        </td>
+                        <td colspan="3"/>
+                        <td colspan="2">
+                            <h3 style="font-weght: bold">مذكرة تسليم</h3>
+                        </td>
+                        <td colspan="2"/>
+                    </tr>
+                </table>
+                <table style="float: left;display: inline-block;border: 1px solid black;width: 60%;" >
+<!--                    column width protocols-->
+                        <tr>
+                            <td style="width: 10%">
+                            </td>
+                            <td style="width: 10%">
+                            </td>
+                            <td style="width: 10%">
+                            </td>
+                            <td style="width: 10%">
+                            </td>
+                            <td style="width: 10%">
+                            </td>
+                            <td style="width: 10%">
+                            </td>
+                            <td style="width: 10%">
+                            </td>
+                            <td style="width: 10%">
+                            </td>
+                            <td style="width: 10%">
+                            </td>
+                            <td style="width: 10%">
+                            </td>
+                        </tr>
+    <!--                    end-->
+                        <tr>
+                            <td colspan="3">
+                                <span>Customer Name : </span>
+                            </td>
+                            <td colspan="5">
+                                <span>
+                                    <t t-esc="o.partner_id.name"/>
+                                </span>
+                            </td>
+                            <td colspan="2" style="text-align: right">
+                                <span>اسم العميل</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"/>
+                            <td colspan="6">
+                                <span>
+                                    <t t-esc="o.partner_id.altName"/>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <span>Contact Person : </span>
+                            </td>
+                            <td colspan="4">
+                                <span t-if="o.user_id">
+                                    <t t-esc="o.user_id.name"/>
+                                </span>
+                            </td>
+                            <td style="text-align: right" colspan="3">
+                                <span>اسم الشخص المسئول</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <span>Tel No : </span>
+                            </td>
+                            <td colspan="6">
+                                <span>
+    <!--                                <t t-esc=""/>-->
+                                </span>
+                            </td>
+                            <td style="text-align: right" colspan="2">
+                                <span>رقم الهاتف</span>
+                            </td>
+                        </tr>
+                    </table>
+                <table style="width: 2%"/>
+                <t t-if="o.partner_id.altName">
+                    <table style="height: 105px;float: right;border: 1px solid black;width: 38%" >
+                        <tr>
+                            <td>
+                                <span>Invoice No. : </span>
+                            </td>
+                            <td>
+                                <span t-if="o.get_invoice_number()">
+                                    <t t-esc="o.get_invoice_number().name"/>
+                                </span>
+                            </td>
+                            <td>
+                                <span>رقم الفاتورة</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>P.O.No: -</span>
+                            </td>
+                            <td>
+                                <span t-if="o.get_sale_number()">
+                                    <t t-esc="o.get_sale_number().name"/>
+                                </span>
+                            </td>
+                            <td>
+                                  <span>رقم امر الشراء</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <p style="height: 80px"></p>
+                </t>
+                <t t-else="">
+                    <table style="height: 84px;float: right;border: 1px solid black;width: 38%" >
+                        <tr>
+                            <td>
+                                <span>Invoice No. : </span>
+                            </td>
+                            <td>
+                                <span t-if="o.get_invoice_number()">
+                                    <t t-esc="o.get_invoice_number().name"/>
+                                </span>
+                            </td>
+                            <td>
+                                <span>رقم الفاتورة</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>P.O.No: -</span>
+                            </td>
+                            <td>
+                                <span t-if="o.get_sale_number()">
+                                    <t t-esc="o.get_sale_number().name"/>
+                                </span>
+                            </td>
+                            <td>
+                                <span>رقم امر الشراء</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <p style="height: 60px"></p>
+                </t>
+
+                <table style="border: 1px solid black;width: 100%" >
+                    <tr>
+                        <td style="width: 18%;float: center" class="sltech-box-class">
+                            <span>رقم الصنف</span>
+                        </td>
+                        <td style="width: 52%" class="sltech-box-class">
+
+                        </td>
+                        <td style="width: 6%" class="sltech-box-class">
+                            <span>الوحدة</span>
+                        </td>
+                        <td style="width: 6%" class="sltech-box-class">
+                            <span>الكمية</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="sltech-box-class">
+                            <span>Reference</span>
+                        </td>
+                        <td class="sltech-box-class">
+                            <span>Description</span>
+                            <span style="float: right">البيان</span>
+                        </td>
+                        <td class="sltech-box-class">
+                            <span>Unit</span>
+                        </td>
+                        <td class="sltech-box-class">
+                            <span>Qty.</span>
+                        </td>
+                    </tr>
+                </table>
+                <table style="width: 100%">
+                    <t t-foreach="o.move_ids_without_package" t-as="line">
+                        <tr>
+                            <td style="width: 18%;">
+                                <span><t t-esc="line.product_id.default_code"/></span>
+                            </td>
+                            <td style="width: 52%">
+                                <span><t t-esc="line.description_picking"/></span>
+                            </td>
+                            <td style="width: 6%">
+                                <span><t t-esc="line.product_id.uom_id.name"/></span>
+                            </td>
+                            <td style="width: 6%">
+                                <span><t t-esc="int(line.quantity_done)"/></span>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+
+                <div class="footer">
+                    <p style="    margin-bottom: 0 !important;"><t t-esc="'____________________________________________________________________________________________________________________________________'"/></p>
+                    <p style="text-align: center">Goods recieved in accordance with order and we undertake to pay the value upon request</p>
+                    <p style="text-align: center">استلمنا المواد الموضحة اعلاه وهي مطابقة تماما لطلبنا ونتعهد بتسديد قيمتها عند الطلب</p>
+                    <table style="height: 90px;display: inline;float: left;border: 1px solid black; width: 60%">
+                        <tr>
+                            <td>
+                                <span>Recieved By : </span>
+                            </td>
+                            <td>
+                                <span><t t-esc="'______________________________'"/></span>
+                            </td>
+                            <td>
+                                <span>اسم المستلم</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>Signature : </span>
+                            </td>
+                            <td>
+                                <span><t t-esc="'______________________________'"/></span>
+                            </td>
+                            <td>
+                                <span>التوقيع</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="width: 5%"/>
+                    <table style="height: 90px;float: right;border: 1px solid black; width: 30%">
+                        <tr>
+                            <td>
+                                <span>Date: </span>
+                            </td>
+                            <td>
+                                <span t-if="o.date_done">
+                                    <t t-esc="str(o.date_done).split(' ')[0]"/>
+                                </span>
+                            </td>
+                            <td>
+                                <span>التاريخ</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+<!--                                <span>Date: </span>-->
+                            </td>
+                            <td>
+                                <span>/ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;/</span>
+                            </td>
+                            <td>
+                                <span>التاريخ</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+            </div>
+        </template>
+
+        <template id="custom_icon_delivery">
+<!--            <t t-call="web.html_container">-->
+<!--                <t t-foreach="docs" t-as="o">-->
+<!--                    <div class="article">-->
+<!--                        <t t-call="customer_invoice_pdf_report.sltech_delivery_body"/>-->
+<!--                    </div>-->
+<!--                </t>-->
+<!--            </t>-->
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                    <t>
+                        <div class="page">
+                            <t t-call="customer_invoice_pdf_report.sltech_delivery_body"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>
