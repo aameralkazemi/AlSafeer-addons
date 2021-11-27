@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record	id="view_search_add_fields_to_products" model="ir.ui.view">
+<field name="name">view.product.add.fields</field>
+<field name="model">product.template</field>
+<field name="inherit_id" ref="product.product_template_form_view"/>
+<field name="arch" type="xml">
+
+     <field name="name" position="after">
+        <div>
+            <h3>
+            <label for="englishName"/>
+           <field name="englishName"/>
+            </h3>
+        </div>
+         <div>
+              <h3>
+             <label for="description2"/>
+             <field name="description2"/>
+               </h3>
+
+        </div>
+     </field>
+
+
+ </field>
+</record>
+<record id="product_template_search_custom_view" model="ir.ui.view">
+      <field name="name">product.template.customsearch</field>
+            <field name="model">product.template</field>
+             <field name="inherit_id" ref="product.product_template_form_view"/>
+             <field name="arch" type="xml">
+
+
+              <xpath expr="//group[1]/group[2]/field[1]" position="before">
+
+             <field class="oe_inline" widget="monetary" name="additional_sale_price" />
+
+             </xpath>
+
+
+
+            </field>
+
+</record>
+</odoo>
