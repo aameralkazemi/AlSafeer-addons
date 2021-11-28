@@ -51,11 +51,10 @@ class AccountMove(models.Model):
                 return {
                     'sale_number': sale_id.name,
                     'delivery_order_name': delivery_name,
-                    'freight_cost': sum([x.price_subtotal for x in sale_id.order_line if x.is_delivery])
+
                 }
         return {
             'sale_number': '',
             'delivery_order_name': '',
-            'freight_cost': 0
         }
 

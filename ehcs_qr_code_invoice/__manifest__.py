@@ -13,7 +13,6 @@
     ],
     'data': [
         'report/account_invoice_report_template.xml',
-        'views/qr_code_invoice_view.xml',
     ],
     'images': [
         'static/description/banner.png',

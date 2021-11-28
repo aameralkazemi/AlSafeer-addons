@@ -253,22 +253,6 @@
 
                 <div class="footer">
                     <table style="border: 1px solid black; width: 100%">
-                        <tr>
-                            <td style="width: 40%"/>
-                            <td style="width: 8%"/>
-                            <td style="width: 12%"/>
-                            <td style="width: 28%">
-                                <span style="float: right">Freight</span>
-                                <span style="float: right">اجور الشحن</span>
-                            </td>
-                            <td>&amp;nbsp;</td>
-                            <td style="border: 1px solid black; width: 12%">
-                                <span>
-                                    <t t-esc="o.currency_id.symbol"/>
-                                    <t t-esc="get_sale_details.get('freight_cost')"/>
-                                </span>
-                            </td>
-                        </tr>
 
                         <tr>
                             <td/>

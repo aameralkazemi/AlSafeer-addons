@@ -10,11 +10,11 @@ from datetime import datetime, timedelta
 class QRCodeInvoice(models.Model):
     _inherit = 'account.move'
 
-    qr_image = fields.Binary("QR Code", compute='_generate_qr_code')
+    qr_image = fields.Binary("QR Code", compute='_generate_qr_code' )
     qr_in_report = fields.Boolean('Show QR in Report')
 
 
-
+    @api.depends('ref')
     def _generate_qr_code(self):
 
         if self.invoice_date:
@@ -36,4 +36,6 @@ class QRCodeInvoice(models.Model):
             base_url = fatoora_obj.base64
 
             self.qr_image = generate_qr_code(base_url)
+
+            return self.qr_image
 
