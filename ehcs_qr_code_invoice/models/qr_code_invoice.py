@@ -14,7 +14,7 @@ class QRCodeInvoice(models.Model):
     qr_in_report = fields.Boolean('Show QR in Report')
 
 
-    @api.depends('ref')
+    @api.depends()
     def _generate_qr_code(self):
 
         if self.invoice_date:
