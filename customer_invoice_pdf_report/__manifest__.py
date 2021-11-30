@@ -25,7 +25,7 @@
     'website': 'https://www.sltecherpsolution.com/',
     'license': 'Other proprietary',
     'depends': [
-        'account', 'stock', 'ak_additional_fields','discount_account_invoice'
+        'account', 'stock', 'ak_additional_fields',
     ],
     'data': [
         'data/report_paperformat_data.xml',
