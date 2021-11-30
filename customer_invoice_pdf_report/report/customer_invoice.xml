@@ -266,7 +266,7 @@
                             <td style="text-align: center;border: 1px solid black;">
                                 <span>
                                     <t t-esc="o.currency_id.symbol"/>
-                                    <t t-esc="o.discount_amt"/>
+                                    <t t-esc="o.total_discount"/>
                                 </span>
                             </td>
                         </tr>

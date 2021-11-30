@@ -4,8 +4,11 @@ from odoo import models, fields, api
 from odoo.tools.misc import formatLang, get_lang
 
 
-class ProductProduct(models.Model):
-    _inherit = 'product.product'
+
+
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
 
     factor = fields.Float('Factor',default=1.0)
 
