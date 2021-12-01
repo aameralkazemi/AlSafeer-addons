@@ -59,7 +59,7 @@
             </t>   
         </xpath>
 
-        <xpath expr="//table[@class='table table-sm o_main_table']/thead/tr/th[5]" position="after">
+        <xpath expr="//table[hasclass('table', 'table-sm', 'o_main_table')]/thead/tr/th[5]" position="after">
             <t t-if="o.discount_type == 'line'">
                 <th class="text-right"><strong>Discount Method</strong></th>
                 <th class="text-right"><strong>Discount Amount</strong></th>

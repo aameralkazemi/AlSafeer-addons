@@ -29,7 +29,7 @@
                          </div>
                    </group>
                 </field>
-                <xpath expr="//group[@class='oe_subtotal_footer']/field[@name='amount_untaxed']" position="after">
+                <xpath expr="//group[hasclass('oe_subtotal_footer')]/field[@name='amount_untaxed']" position="after">
                         <field name="discount_amt" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('discount_type','=','line')]}"/>
                         <field name="discount_amt_line" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('discount_type','=','global')]}"/>
                         <field name="discount_amount_line"  invisible="1"/>
