@@ -1,0 +1,32 @@
+<odoo>
+    <!-- views -->
+
+
+    <!-- form -->
+    <record id="manual_rate_exchange_factura_cliente_form_view" model="ir.ui.view">
+        <field name="name">factura.cliente.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='currency_id']" position="before">
+                <field name="check_rate"/>
+                <field name="rate_exchange" attrs="{'invisible': [('check_rate', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//form/header/button[@name='action_post']" position="attributes">
+                <attribute name="context">{'value_check_rate':check_rate, 'value_rate_exchange': rate_exchange}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='price_unit']" position="after">
+                <field name="local_currency_price"  readonly="1" force_save="1"/>
+            </xpath>
+
+                    <xpath expr="////form/sheet/notebook/page[@id='aml_tab']/field[@name='line_ids']/tree/field[@name='tag_ids']" position="after">
+                        <field name="local_currency_price" invisible="1" />
+                    </xpath>
+
+
+
+
+        </field>
+    </record>
+</odoo>
+
