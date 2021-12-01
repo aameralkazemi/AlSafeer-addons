@@ -296,7 +296,7 @@
                             <td style="text-align: center;border: 1px solid black;">
                                 <span>
                                     <t t-esc="o.currency_id.symbol"/>
-                                    <t t-esc="o.amount_tax"/>
+                                    <t t-esc="'%.2f'% o.amount_tax"/>
                                 </span>
                             </td>
                         </tr>
