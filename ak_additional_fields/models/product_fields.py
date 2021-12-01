@@ -5,4 +5,3 @@ class productTemplate(models.Model):
     englishName = fields.Char(string="English Name")
     description2 = fields.Char(string="Item Description")
     additional_sale_price = fields.Float(string = "Sales Price 2")
-
