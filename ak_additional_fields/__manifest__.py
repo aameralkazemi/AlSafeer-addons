@@ -12,9 +12,10 @@
     'website':"www.expertsintech.com",
     'depends': ['base','stock','sale'],
     'data': [
-      'views/altNameView.xml',
+    'views/altNameView.xml',
     'views/productTemplateView.xml',
     'views/customer_search.xml',
+    "views/qty_on_hand.xml",
 
 
 
