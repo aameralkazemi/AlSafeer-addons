@@ -9,22 +9,21 @@
 
                 </style>
                 <table style="border: 1px solid black;width: 100%" >
-
-                    <tr>
-                        <td  colspan="4">
-
+                   <tr>
+                        <td  colspan="8">
+                            <span>VAT#</span>
                             <span>
-
+                                <t t-esc="o.company_id.vat"/>
                             </span>
                         </td>
-                        <td  colspan="12"/>
+                        <td  colspan="8"/>
                         <td style="text-align: right"  colspan="4">
                             <span>
-
+                                <t t-esc="o.company_id.vat"/>
                             </span>
+                                <span>الرقم الضريبي</span>
                         </td>
                     </tr>
-
                     <tr>
                         <td  colspan="3"/>
                         <td colspan="4">
@@ -237,14 +236,13 @@
                                 <span><t t-esc="line.product_uom_id.name"/></span>
                             </td>
                             <td style="width: 6%">
-                                <span><t t-esc="int(line.quantity)"/></span>
+                                <span><t t-esc="'%.2f'% int(line.quantity)"/></span>
                             </td>
                             <td style="width: 10%">
-                                <span><t t-esc="line.price_unit"/></span>
+                                <span><t t-esc="'%.2f'% line.price_unit"/></span>
                             </td>
                             <td style="width: 8%">
-                                <t t-esc="o.currency_id.symbol"/>
-                                <span><t t-esc="line.price_subtotal"/></span>
+                                <span><t t-esc="'%.2f'% line.price_subtotal"/></span>
                             </td>
                         </tr>
                     </t>
@@ -266,7 +264,7 @@
                             <td style="text-align: center;border: 1px solid black;">
                                 <span>
                                     <t t-esc="o.currency_id.symbol"/>
-                                    <t t-esc="o.discount_amt"/>
+                                    <t t-esc="'%.2f'% o.discount_amt"/>
                                 </span>
                             </td>
                         </tr>
@@ -281,7 +279,7 @@
                             <td style="text-align: center;border: 1px solid black;">
                                 <span>
                                     <t t-esc="o.currency_id.symbol"/>
-                                    <t t-esc="o.amount_untaxed"/>
+                                    <t t-esc="'%.2f'% o.amount_untaxed"/>
                                 </span>
                             </td>
                         </tr>
@@ -315,7 +313,7 @@
                             <td style="text-align: center;border: 1px solid black;">
                                 <span>
                                     <t t-esc="o.currency_id.symbol"/>
-                                    <t t-esc="o.amount_total" />
+                                    <t t-esc="'%.2f'% o.amount_total" />
                                 </span>
                             </td>
                         </tr>
@@ -333,6 +331,21 @@
                                 <span>
                                     Page# 1
                                 </span>
+                            </td>
+                        </tr>
+                           <tr>
+                               <td colspan="3">
+                                <span>اسم البائع</span>
+                                <span><t t-esc="o.invoice_user_id.name"/></span>
+                                 <span>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>
+                                 <span>رقم الجوال</span>
+                                 <span><t t-esc="o.invoice_user_id.mobile"/></span>
+                            </td>
+                            <td colspan="2">
+
+                            </td>
+                            <td>
+
                             </td>
                         </tr>
                     </table>
