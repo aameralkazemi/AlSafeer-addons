@@ -15,7 +15,7 @@
                             <h6 style="font-size: 15px;color: black">
                              <b>  <t t-esc="o.company_id.street2"/> &amp;nbsp;</b>
                             </h6>
-                            <h6 style="font-size: 15px; color: blue;">
+                            <h6 style="font-size: 15px;">
                               <b>Phone Number:  <t t-esc="o.company_id.phone"/></b>
                             </h6>
                             <h6 style="float:"></h6>
@@ -29,7 +29,7 @@
                             <h6 style="text-align: right;font-size: 15px;color: black">
                                 <b>  <t t-esc="o.company_id.street"/></b>
                             </h6>
-                            <h6 style="text-align: right;font-size: 15px;color: blue;">
+                            <h6 style="text-align: right;font-size: 15px;">
                                <b>  <t t-esc="o.company_id.phone"/>: رقم الجوال </b>
                             </h6>
                             <h6 style="text-align: right;font-size: 15px;"></h6>
