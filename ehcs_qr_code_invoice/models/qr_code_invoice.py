@@ -22,7 +22,7 @@ class QRCodeInvoice(models.Model):
             future_date_and_time = current_date + timedelta(hours=3)
 
             fatoora_obj = Fatoora(
-                seller_name=self.company_id.name,
+                seller_name=self.company_id.name_of_company,
                 tax_number=self.company_id.vat,  # or "1234567891"
                 invoice_date=str(future_date_and_time),  # Timestamp
                 total_amount= self.amount_total,  # or 100.0, 100.00, "100.0", "100.00"

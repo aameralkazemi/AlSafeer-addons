@@ -3,11 +3,40 @@
     <data>
 
         <template id="sltech_invoice_body">
-            <t t-set="get_sale_details" t-value="o.get_sale_details()"/>
-            <div class="cus_en">
-                <style>
+            <div t-attf-class="'header'">
+                    <div class="o_background_header">
 
-                </style>
+                        <div class="clearfix" style="width:98%">
+                        <div class ="leftbox" style="float:left;width:50%" >
+
+                             <h6 style="font-size: 23px">
+                                <b>AlSafeer International for trading</b>
+                            </h6>
+                            <h6 style="font-size: 15px;color: black">
+                                 <b>PO: 139849 Jeddah 2341 Alharamain Rd. AlNakheel st.</b>
+                            </h6>
+                            <h6 style="font-size: 15px; color: blue;">telephone #: 0126407167</h6>
+                            <h6 style="float: right;"></h6>
+
+                        </div>
+
+                        <div class ="rightbox" style="float:right;width:50%" >
+                             <h6 style="text-align: right;font-size: 23px">
+                                <b>مؤسسة السفیر الدولي للتجارة</b>
+                            </h6>
+                            <h6 style="text-align: right;font-size: 15px;color: black">
+                                 <b>ص ب 139849 جدة 23241 - طریق الحرمین – حي النخیل</b>
+                            </h6>
+                            <h6 style="text-align: right;font-size: 15px;color: blue;">رقم الهاتف: 0126407167</h6>
+                            <h6 style="text-align: right;font-size: 15px;color: blue;"></h6>
+                        </div>
+
+                        </div>
+
+                        <div class="clearfix mb8"/>
+                    </div>
+                </div>
+
                 <table style="border: 1px solid black;width: 100%" >
                    <tr>
                         <td  colspan="8">
@@ -87,12 +116,14 @@
                         <td colspan="4"/>
                         <td colspan="7">
                             <span>
-                                <t t-esc="o.partner_id.name"/>
+                                <t t-esc="o.partner_id.mobile"/>
                             </span>
                         </td>
 <!--                        <td colspan="1"/>-->
                         <td colspan="7">
-                            <span><t t-esc="o.partner_id.altName"/></span>
+                             <span>
+                                <t t-esc="o.partner_id.name"/>
+                            </span>
                         </td>
 <!--                        <td colspan="2"/>-->
                         <td colspan="1" style="text-align: right">
@@ -352,7 +383,6 @@
                 </div>
 
 
-            </div>
         </template>
 
         <template id="custom_icon_invoice">
