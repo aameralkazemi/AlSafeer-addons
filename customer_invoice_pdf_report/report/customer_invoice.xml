@@ -271,7 +271,7 @@
                                 <span><t t-esc="line.product_uom_id.name"/></span>
                             </td>
                             <td style="width: 6%">
-                                <span><t t-esc="'%.2f'% int(line.quantity)"/></span>
+                                <span><t t-esc="'%.2f'% line.quantity"/></span>
                             </td>
                             <td style="width: 10%">
                                 <span><t t-esc="'%.2f'% line.price_unit"/></span>
