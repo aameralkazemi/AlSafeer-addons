@@ -226,7 +226,7 @@
                                 <span><t t-esc="line.product_id.uom_id.name"/></span>
                             </td>
                             <td style="width: 6%">
-                                <span><t t-esc="int(line.quantity_done)"/></span>
+                                <span><t t-esc="'%.2f'% line.quantity_done"/></span>
                             </td>
                         </tr>
                     </t>

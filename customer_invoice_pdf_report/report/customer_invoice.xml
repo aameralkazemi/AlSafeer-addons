@@ -236,6 +236,7 @@
                             <span>القيمة</span>
                         </td>
                     </tr>
+
                     <tr>
                         <td class="sltech-full-border sltech-bottom sltech-left sltech-right">
                             <span>Reference</span>
@@ -257,6 +258,8 @@
                             <span>Amount</span>
                         </td>
                     </tr>
+
+
                 </table>
                 <table class="border-collapse" style="width: 100%; ">
                     <t t-foreach="o.invoice_line_ids" t-as="line">
