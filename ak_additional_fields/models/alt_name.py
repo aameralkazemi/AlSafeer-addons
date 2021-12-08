@@ -5,6 +5,7 @@ class Partnerpage(models.Model):
 
     altName = fields.Char(string="English Name")
     partnerCode = fields.Char(string="Partner Code" , index = True , store = True)
+    cr_no = fields.Char(string="CR")
 
 
 

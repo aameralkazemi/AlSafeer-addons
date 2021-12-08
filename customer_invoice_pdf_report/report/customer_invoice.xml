@@ -60,8 +60,24 @@
                     <tr>
                         <td  colspan="3"/>
                         <td colspan="4">
-                            <h3 t-if="o.type == 'out_invoice'" style="text-align: center;font-weght: bold">INVOICE</h3>
-                            <h3 t-if="o.type == 'in_invoice'" style="text-align: center;font-weght: bold">BILL</h3>
+                             <h3 t-if="o.type == 'out_invoice' and o.state == 'posted'">
+                                Tax Invoice
+                            </h3>
+                            <h3 t-if="o.type == 'out_invoice' and o.state == 'draft'">
+                                Draft Invoice
+                            </h3>
+                            <h3 t-if="o.type == 'out_invoice' and o.state == 'cancel'">
+                                Cancelled Invoice
+                            </h3>
+                            <h3 t-if="o.type == 'out_refund'">
+                                Credit Note
+                            </h3>
+                            <h3 t-if="o.type == 'in_refund'">
+                                Vendor Credit Note
+                            </h3>
+                            <h3 t-if="o.type == 'in_invoice'">
+                                Vendor Bill
+                            </h3>
                         </td>
                         <td colspan="3"/>
                         <td colspan="3">
@@ -71,7 +87,28 @@
                         </td>
                         <td colspan="3"/>
                         <td colspan="2">
-                            <h3 style="font-weght: bold">فاتورة</h3>
+
+
+                              <h3 t-if="o.type == 'out_invoice' and o.state == 'posted'">
+                                فاتورة ضريبية
+                            </h3>
+                            <h3 t-if="o.type == 'out_invoice' and o.state == 'draft'">
+                                مسودة فاتورة
+                            </h3>
+                            <h3 t-if="o.type == 'out_invoice' and o.state == 'cancel'">
+                                فاتورة ملغاة
+                            </h3>
+                            <h3 t-if="o.type == 'out_refund'">
+                                إشعار خصم
+                            </h3>
+                            <h3 t-if="o.type == 'in_refund'">
+                                إشعار خصم المورد
+                            </h3>
+                            <h3 t-if="o.type == 'in_invoice'">
+                                فاتورة المورد
+                            </h3>
+
+
                         </td>
                         <td colspan="2"/>
                     </tr>
@@ -172,6 +209,27 @@
                         </td>
                         <td style="text-align: right">
                             <span>الرقم الضريبي</span>
+                        </td>
+                    </tr>
+
+                    <tr t-if="o.partner_id.cr_no">
+                        <td>
+                            <span>CR : </span>
+                        </td>
+                        <td colspan="4"/>
+                        <td>
+                            <span>
+                                <t t-esc="o.partner_id.cr_no"/>
+                            </span>
+                        </td>
+                        <td colspan="10"/>
+                        <td colspan="3">
+                            <span>
+                               <t t-esc="o.partner_id.cr_no"/>
+                            </span>
+                        </td>
+                        <td style="text-align: right">
+                            <span>السجل التجاري</span>
                         </td>
                     </tr>
                     <tr>

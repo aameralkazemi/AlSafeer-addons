@@ -16,6 +16,10 @@
    </xpath>
 
 
+    <field name="vat" position="after">
+				<field name="cr_no" />
+    </field>
+
  </field>
  </record>
 
