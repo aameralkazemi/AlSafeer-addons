@@ -7,29 +7,35 @@
                     <div class="o_background_header">
 
                         <div class="clearfix" style="width:98%">
-                        <div class ="leftbox" style="float:left;width:50%" >
+                        <div class ="leftbox" style="float:left;width:35%;height:100px;" >
 
-                             <h6 style="font-size: 23px">
+                             <h6 style="font-size: 20px">
                                 <b>AlSafeer International for trading</b>
                             </h6>
-                            <h6 style="font-size: 15px;color: black">
+                            <h6 style="font-size: 13px;color: black">
                              <b>  <t t-esc="o.company_id.street2"/> &amp;nbsp;</b>
                             </h6>
-                            <h6 style="font-size: 15px;">
+                            <h6 style="font-size: 13px;">
                               <b>Phone Number:  <t t-esc="o.company_id.phone"/></b>
                             </h6>
                             <h6 style="float:"></h6>
 
                         </div>
 
-                        <div class ="rightbox" style="float:right;width:50%" >
-                             <h6 style="text-align: right;font-size: 23px">
+                        <div class="divcenter" style="float:left;width:30% ;">
+                            <img style=" display: block; margin-left: auto; margin-right: auto;margin-bottom: auto;margin-top: auto; width: 100%; max-width: 100; max-height: 80;"
+                             src="/customer_invoice_pdf_report/static/src/img/Logo.png"/>
+
+                        </div>
+
+                        <div class ="rightbox" style="float:right;width:35%;height:100px;" >
+                             <h6 style="text-align: right;font-size: 20px">
                                 <b>مؤسسة السفیر الدولي للتجارة</b>
                             </h6>
-                            <h6 style="text-align: right;font-size: 15px;color: black">
+                            <h6 style="text-align: right;font-size: 13px;color: black">
                                 <b>  <t t-esc="o.company_id.street"/></b>
                             </h6>
-                            <h6 style="text-align: right;font-size: 15px;">
+                            <h6 style="text-align: right;font-size: 13px;">
                                <b>  <t t-esc="o.company_id.phone"/>: رقم الجوال </b>
                             </h6>
                             <h6 style="text-align: right;font-size: 15px;"></h6>
@@ -60,6 +66,7 @@
                     <tr>
                         <td  colspan="3"/>
                         <td colspan="4">
+
                              <h3 t-if="o.type == 'out_invoice' and o.state == 'posted'">
                                 Tax Invoice
                             </h3>
@@ -424,8 +431,14 @@
                             </td>
                             <td colspan="2"/>
                             <td>
-                                <span>
-                                    Page# 1
+                                  <span>
+
+                                        Page:
+                                        <span class="page"/>
+                                        /
+                                        <span class="topage"/>
+
+
                                 </span>
                             </td>
                         </tr>
