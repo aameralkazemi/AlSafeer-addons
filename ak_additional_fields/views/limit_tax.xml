@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+        <record	id="limit_tax_sale" model="ir.ui.view">
+        <field name="name">limit.tax.sale</field>
+        <field name="model">sale.order</field>
+         <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+                        <xpath expr="//group[1]/field[11]" position="replace">
+                            <field name="tax_id" widget="many2many_tags" invisible = "1" options="{'no_create': True}" context="{'search_view_ref': 'account.account_tax_view_search'}" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" attrs="{'readonly': [('qty_invoiced', '&gt;', 1)]}"/>
+                        </xpath>
+         </field>
+        </record>
+
+    </odoo>
