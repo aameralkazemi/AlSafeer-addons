@@ -260,7 +260,10 @@
                             <span>رقم امر الشراء</span>
                         </td>
                     </tr>
-                    <tr>
+
+
+
+                    <tr t-if="not o.type == 'out_refund'">
                         <td>
                             <span>Delivery Note No</span>
                         </td>
@@ -280,6 +283,26 @@
                             <span>رقم امر التسليم</span>
                         </td>
                     </tr>
+
+                    <tr t-if="o.type == 'out_refund'">
+                        <td>
+                            <span>Invoice No</span>
+                        </td>
+                        <td colspan="4"/>
+                        <td>
+                                <t t-esc="o.ref"/>
+                        </td>
+                        <td colspan="10" />
+                        <td colspan="3" >
+                                <t t-esc="o.ref"/>
+                        </td>
+                        <td style="text-align: right">
+                            <span>رقم الفاتورة</span>
+                        </td>
+                    </tr>
+
+
+
                 </table>
                 <p/>
                 <table style="border: 1px solid black;width: 100%" >
