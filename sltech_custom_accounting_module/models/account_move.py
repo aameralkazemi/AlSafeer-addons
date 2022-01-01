@@ -66,7 +66,7 @@ class AccountInvoice(models.Model):
                         'product_id': l.product_id.id,
                         'name': l.product_id.name,
                         'account_id': l.product_id.product_tmpl_id.get_product_accounts()['stock_input'].id,
-                        'price_unit': self.env.user.company_id.currency_id._convert(l.price_subtotal,
+                        'price_unit': self.env.user.company_id.currency_id._convert(l.price_untax,
                                                                                     self.env.user.company_id.currency_id,
                                                                                     self.env.user.company_id,
                                                                                     l.sltech_move_id.date),
