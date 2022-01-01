@@ -18,30 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Additional Lines in Journal Entries',
-    'version': '1.0',
-    'category': 'Additional Lines in Journal Entries',
-    'summary': 'Additional Lines in Journal Entries ',
-    'description': "",
-    'author': "Sachin Burnawal",
-    'website': 'https://www.sltecherpsolution.com/',
-    'license': 'Other proprietary',
-    'depends': [
-        'product',
-        'account',
-        'stock_landed_costs',
-    ],
-    'data': [
-        'security/ir.model.access.csv',
-        'data/payment_cron.xml',
-        'views/product_template.xml',
-        'views/account_move.xml',
-    ],
-    'qweb': [
-    ],
-    'demo': [
-    ],
-    'css': [
-    ],
-}
+
+from . import multi_company_transfer
+from . import res_partner
+from . import stock_move

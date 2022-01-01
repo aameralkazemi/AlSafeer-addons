@@ -20,4 +20,6 @@
 ##############################################################################
 from . import account_move
 from . import product_template
+from . import product_product
 from . import account_payment
+from . import stock_change_standard_price

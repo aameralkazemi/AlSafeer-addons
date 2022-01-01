@@ -19,24 +19,20 @@
 #
 ##############################################################################
 {
-    'name': 'Additional Lines in Journal Entries',
+    'name': 'Stock Transfer Between Companies',
     'version': '1.0',
-    'category': 'Additional Lines in Journal Entries',
-    'summary': 'Additional Lines in Journal Entries ',
+    'category': 'Stock Transfer Between Companies',
+    'summary': 'Stock Transfer Between Companies ',
     'description': "",
     'author': "Sachin Burnawal",
     'website': 'https://www.sltecherpsolution.com/',
     'license': 'Other proprietary',
     'depends': [
-        'product',
         'account',
-        'stock_landed_costs',
+        'stock_account',
     ],
     'data': [
-        'security/ir.model.access.csv',
-        'data/payment_cron.xml',
-        'views/product_template.xml',
-        'views/account_move.xml',
+        'views/res_partner.xml',
     ],
     'qweb': [
     ],
