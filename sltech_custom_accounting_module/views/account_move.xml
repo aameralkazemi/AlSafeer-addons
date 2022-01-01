@@ -15,7 +15,9 @@
                                 <field name="product_id" required="1"/>
                                 <field name="quantity"/>
                                 <field name="price_unit"/>
-                                <field name="price_subtotal" readonly="1"/>
+                                <field name="tax_ids" widget="many2many_tags"/>
+                                <!--                                <field name="price_subtotal" readonly="1"/>-->
+                                <field name="price_untax" readonly="1"/>
                                 <field name="payment_id"
                                        attrs="{'column_invisible': [('parent.state', '!=', 'posted')]}"/>
                                 <field name="payment_state"
@@ -24,7 +26,8 @@
                         </field>
                         <group class="oe_subtotal_footer"
                                attrs="{'invisible': [('type', 'not in', ('in_invoice'))]}">
-                            <!--                                <field name="sltech_amount_untaxed"/>-->
+                            <field name="sltech_amount_untaxed"/>
+                            <field name="sltech_amount_tax"/>
                             <!--                                <field name="sltech_amount_by_group" widget="tax-group-custom-field" nolabel="1"-->
                             <!--                                       colspan="2"/>-->
                             <field name="sltech_amount_total" class="oe_subtotal_footer_separator"/>
@@ -104,17 +107,17 @@
             </field>
         </record>
 
-<!--        <record id="account_view_move_form_inherited" model="ir.ui.view">-->
-<!--            <field name="name">Amount To Word Customer Invoice</field>-->
-<!--            <field name="model">account.move</field>-->
-<!--            <field name="inherit_id" ref="stock_landed_costs.account_view_move_form_inherited"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <button name="button_create_landed_costs" position="replace">-->
-<!--                    <button name="button_create_landed_costs" class="oe_highlight" string="Create Landed Costs"-->
-<!--                            type="object" groups="account.group_account_invoice"-->
-<!--                            attrs="{'invisible': [('landed_costs_visible', '!=', True), ('landed_costs_ids', '!=', [])]}"/>-->
-<!--                </button>-->
-<!--            </field>-->
-<!--        </record>-->
+        <record id="account_view_move_form_inherited" model="ir.ui.view">
+            <field name="name">Amount To Word Customer Invoice</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="stock_landed_costs.account_view_move_form_inherited"/>
+            <field name="arch" type="xml">
+                <button name="button_create_landed_costs" position="after">
+                    <button name="sltech_button_create_landed_costs" class="oe_highlight" string="Create Landed Costs"
+                            type="object" groups="account.group_account_invoice"
+                            attrs="{'invisible': ['|', ('type', '!=', 'in_invoice'), ('landed_costs_ids', '!=', [])]}"/>
+                </button>
+            </field>
+        </record>
     </data>
 </odoo>
