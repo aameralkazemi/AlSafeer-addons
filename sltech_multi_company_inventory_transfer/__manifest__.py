@@ -30,6 +30,7 @@
     'depends': [
         'account',
         'stock_account',
+        'ks_multi_company_inventory_transfer',
     ],
     'data': [
         'views/res_partner.xml',

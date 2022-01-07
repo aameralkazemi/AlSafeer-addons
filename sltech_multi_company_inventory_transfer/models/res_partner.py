@@ -24,4 +24,8 @@ from odoo.exceptions import UserError, ValidationError
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    intermediary_account_id = fields.Many2one('account.account', 'INTERMEDIARY ACCOUNT')
+    intermediary_account_id = fields.Many2one('account.account', 'INTERMEDIARY ACCOUNT',
+                                              company_dependent=True,
+                                              domain="[('company_id', '=', allowed_company_ids[0]), ('deprecated', '=', False)]",
+                                              check_company=True
+                                              )
