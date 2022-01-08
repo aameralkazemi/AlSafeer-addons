@@ -133,6 +133,7 @@ class AccountInvoice(models.Model):
                     'name': line.product_id.seller_ids[0].name.property_account_payable_id.name,
                     'credit': line.price_subtotal,
                     'sltech_move_id': self.id,
+                    'partner_id': line.product_id.seller_ids[0].name.id,
                 }))
 
                 account_tax = line.tax_ids.compute_all(price_unit=line.amount_tax,
