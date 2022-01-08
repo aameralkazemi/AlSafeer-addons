@@ -116,40 +116,59 @@ class AccountInvoice(models.Model):
                     'currency_id': self.currency_id.id,
                 }).id
 
-            account_payable = self.env['account.account'].search(
-                [
-                    # ('user_type_id', '=', self.env.ref('account.data_account_type_payable').id),
-                    ('name', '=', 'Account Payable'),
-                    ('company_id', '=', self.company_id.id)], limit=1)
-
-
+            line_ids = []
             for line in self.sltech_move_line:
                 if not line.product_id.seller_ids:
                     raise ValidationError('Please choose Vendor inside Landed Cost in %s!'%line.product_id.name)
 
-            line_ids = [(0, 0, {
-                'account_id': line.product_id.additional_account_id.id,
-                'name': line.product_id.name,
-                'debit': line.price_untax,
-                'sltech_move_id': self.id,
-            }) for line in self.sltech_move_line] + [(0, 0, {
-                'account_id': line.product_id.seller_ids[0].name.property_account_payable_id.id,
-                'name': line.product_id.seller_ids[0].name.property_account_payable_id.name,
-                'credit': line.price_untax,
-                'sltech_move_id': self.id,
-            }) for line in self.sltech_move_line]
-            if self.sltech_amount_tax:
-                account_tax = self.env['account.account'].search(
-                    [
-                        # ('user_type_id', '=', self.env.ref('account.data_account_type_current_liabilities').id),
-                        ('name', '=', 'Tax Paid'),
-                        ('company_id', '=', self.company_id.id)], limit=1)
+                line_ids.append((0, 0, {
+                    'account_id': line.product_id.additional_account_id.id,
+                    'name': line.product_id.name,
+                    'debit': line.price_untax,
+                    'sltech_move_id': self.id,
+                }))
+
+                line_ids.append((0, 0, {
+                    'account_id': line.product_id.seller_ids[0].name.property_account_payable_id.id,
+                    'name': line.product_id.seller_ids[0].name.property_account_payable_id.name,
+                    'credit': line.price_subtotal,
+                    'sltech_move_id': self.id,
+                }))
+
+                account_tax = line.tax_ids.compute_all(price_unit=line.amount_tax,
+                                                      currency=False,
+                                                      quantity=1)
+
                 line_ids += [(0, 0, {
-                    'account_id': account_tax.id,
-                    'name': account_tax.name,
-                    'debit': self.sltech_amount_tax,
+                    'account_id': account_tax['taxes'][0]['account_id'],
+                    'name': account_tax['taxes'][0]['name'],
+                    'debit': line.amount_tax,
                     'sltech_move_id': self.id,
                 })]
+
+            # line_ids = [(0, 0, {
+            #     'account_id': line.product_id.additional_account_id.id,
+            #     'name': line.product_id.name,
+            #     'debit': line.price_untax,
+            #     'sltech_move_id': self.id,
+            # }) for line in self.sltech_move_line] + [(0, 0, {
+            #     'account_id': line.product_id.seller_ids[0].name.property_account_payable_id.id,
+            #     'name': line.product_id.seller_ids[0].name.property_account_payable_id.name,
+            #     'credit': line.price_subtotal,
+            #     'sltech_move_id': self.id,
+            # }) for line in self.sltech_move_line]
+            # if self.sltech_amount_tax:
+            #     account_tax = account_tax.compute_all(price_unit=self.sltech_amount_tax,
+            #                                           currency=False,
+            #                                           quantity=1)
+            #
+            #
+            #     line_ids += [(0, 0, {
+            #         'account_id': account_tax['taxes'][0]['account_id'],
+            #         'name': account_tax['taxes'][0]['name'],
+            #         'debit': self.sltech_amount_tax,
+            #         'sltech_move_id': self.id,
+            #     })]
 
             self.sltech_move_id.write({
                 'line_ids': [(5, 0)]
