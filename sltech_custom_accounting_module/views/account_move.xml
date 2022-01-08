@@ -103,6 +103,9 @@
                             </tree>
                         </field>
                     </page>
+                    <page name="third_party_move_ids" string="Third Party Moves">
+                        <field name="sltech_move_ids" context="{'tree_view_ref': 'account.view_move_tree'}"/>
+                    </page>
                 </notebook>
             </field>
         </record>
@@ -112,7 +115,7 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="stock_landed_costs.account_view_move_form_inherited"/>
             <field name="arch" type="xml">
-                <button name="button_create_landed_costs" position="after">
+                <button name="button_create_landed_costs" position="replace">
                     <button name="sltech_button_create_landed_costs" class="oe_highlight" string="Create Landed Costs"
                             type="object" groups="account.group_account_invoice"
                             attrs="{'invisible': ['|', ('type', '!=', 'in_invoice'), ('landed_costs_ids', '!=', [])]}"/>
