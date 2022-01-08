@@ -122,17 +122,22 @@ class AccountInvoice(models.Model):
                     ('name', '=', 'Account Payable'),
                     ('company_id', '=', self.company_id.id)], limit=1)
 
+
+            for line in self.sltech_move_line:
+                if not line.product_id.seller_ids:
+                    raise ValidationError('Please choose Vendor inside Landed Cost in %s!'%line.product_id.name)
+
             line_ids = [(0, 0, {
                 'account_id': line.product_id.additional_account_id.id,
                 'name': line.product_id.name,
                 'debit': line.price_untax,
                 'sltech_move_id': self.id,
             }) for line in self.sltech_move_line] + [(0, 0, {
-                'account_id': account_payable.id,
-                'name': account_payable.name,
-                'credit': self.sltech_amount_total,
+                'account_id': line.product_id.seller_ids[0].name.property_account_payable_id.id,
+                'name': line.product_id.seller_ids[0].name.property_account_payable_id.name,
+                'credit': line.price_untax,
                 'sltech_move_id': self.id,
-            })]
+            }) for line in self.sltech_move_line]
             if self.sltech_amount_tax:
                 account_tax = self.env['account.account'].search(
                     [
