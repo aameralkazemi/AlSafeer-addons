@@ -43,8 +43,8 @@ class AccountInvoice(models.Model):
 
     def sltech_button_create_landed_costs(self):
         """Create a `stock.landed.cost` record associated to the account move of `self`, each
-                `stock.landed.costs` lines mirroring the current `account.move.line` of self.
-                """
+        `stock.landed.costs` lines mirroring the current `account.move.line` of self.
+        """
         self.ensure_one()
         cost_lines = []
         landed_costs_lines = self.line_ids.filtered(lambda line: line.is_landed_costs_line)
@@ -139,18 +139,19 @@ class AccountInvoice(models.Model):
                     'exclude_from_invoice_tab': True,
                 }))
 
-                account_tax = line.tax_ids.compute_all(price_unit=line.amount_tax,
-                                                      currency=False,
-                                                      quantity=1)
+                if line.tax_ids:
+                    account_tax = line.tax_ids.compute_all(price_unit=line.amount_tax,
+                                                          currency=False,
+                                                          quantity=1)
 
-                line_ids += [(0, 0, {
-                    'account_id': account_tax['taxes'][0]['account_id'],
-                    'name': account_tax['taxes'][0]['name'],
-                    'debit': line.amount_tax,
-                    'sltech_move_id': self.id,
+                    line_ids += [(0, 0, {
+                        'account_id': account_tax['taxes'][0]['account_id'],
+                        'name': account_tax['taxes'][0]['name'],
+                        'debit': line.amount_tax,
+                        'sltech_move_id': self.id,
 
-                    'exclude_from_invoice_tab': True,
-                })]
+                        'exclude_from_invoice_tab': True,
+                    })]
 
                 sltech_move_ids[partner_landed_id.id] += line_ids
 
