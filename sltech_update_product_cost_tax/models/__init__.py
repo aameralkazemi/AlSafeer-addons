@@ -18,14 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, api, fields, _
-from odoo.exceptions import ValidationError
-
-
-class ProductTemplate(models.Model):
-    _inherit = "product.template"
-
-    additional_info = fields.Boolean(default=False, striing='Additional Info')
-    additional_account_id = fields.Many2one(
-        'account.account', 'Additional Account', company_dependent=True,
-        domain="[('company_id', '=', allowed_company_ids[0]), ('deprecated', '=', False)]", check_company=True)
+from . import product_template
+from . import product_product
+from . import stock_change_standard_price

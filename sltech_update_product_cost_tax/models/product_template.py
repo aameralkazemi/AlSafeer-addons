@@ -25,7 +25,20 @@ from odoo.exceptions import ValidationError
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    additional_info = fields.Boolean(default=False, striing='Additional Info')
-    additional_account_id = fields.Many2one(
-        'account.account', 'Additional Account', company_dependent=True,
-        domain="[('company_id', '=', allowed_company_ids[0]), ('deprecated', '=', False)]", check_company=True)
+    @api.model
+    def create(self, vals):
+        res = super(ProductTemplate, self).create(vals)
+        account_sale_tax_id = []
+        account_purchase_tax_id = []
+        for company_id in self.env['res.company'].sudo().search([]):
+            account_sale_tax_id.append(
+                company_id.account_sale_tax_id.id
+            )
+            account_purchase_tax_id.append(
+                company_id.account_purchase_tax_id.id
+            )
+        self.sudo().write(dict(
+            taxes_id=[(6, 0, account_sale_tax_id)],
+            supplier_taxes_id=[(6, 0, account_purchase_tax_id)]
+        ))
+        return res

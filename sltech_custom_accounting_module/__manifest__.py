@@ -34,7 +34,6 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        'data/payment_cron.xml',
         'views/product_template.xml',
         'views/account_move.xml',
     ],

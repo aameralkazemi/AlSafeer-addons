@@ -18,14 +18,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from odoo import models, api, fields, _
-from odoo.exceptions import ValidationError
-
-
-class ProductTemplate(models.Model):
-    _inherit = "product.template"
-
-    additional_info = fields.Boolean(default=False, striing='Additional Info')
-    additional_account_id = fields.Many2one(
-        'account.account', 'Additional Account', company_dependent=True,
-        domain="[('company_id', '=', allowed_company_ids[0]), ('deprecated', '=', False)]", check_company=True)
+{
+    'name': 'Update Products Cost Tax',
+    'version': '1.0',
+    'category': 'Update Products Cost Tax',
+    'summary': 'Update Products Cost Tax ',
+    'description': "",
+    'author': "Sachin Burnawal",
+    'website': 'https://www.sltecherpsolution.com/',
+    'license': 'Other proprietary',
+    'depends': [
+        'product',
+        'account',
+        'stock_landed_costs',
+    ],
+    'data': [
+        'data/data.xml',
+    ],
+    'qweb': [
+    ],
+    'demo': [
+    ],
+    'css': [
+    ],
+}
