@@ -45,20 +45,20 @@ class AccountInvoice(models.Model):
         """Create a `stock.landed.cost` record associated to the account move of `self`, each
                 `stock.landed.costs` lines mirroring the current `account.move.line` of self.
                 """
+        self.ensure_one()
+        cost_lines = []
+        landed_costs_lines = self.line_ids.filtered(lambda line: line.is_landed_costs_line)
+        if landed_costs_lines:
+            for l in landed_costs_lines:
+                cost_lines.append((0, 0, {
+                    'product_id': l.product_id.id,
+                    'name': l.product_id.name,
+                    'account_id': l.product_id.product_tmpl_id.get_product_accounts()['stock_input'].id,
+                    'price_unit': l.currency_id._convert(l.price_subtotal, l.company_currency_id, l.company_id,
+                                                         l.move_id.date),
+                    'split_method': 'equal',
+                }))
         if self.sltech_move_line:
-            self.ensure_one()
-            cost_lines = []
-            landed_costs_lines = self.line_ids.filtered(lambda line: line.is_landed_costs_line)
-            if landed_costs_lines:
-                for l in landed_costs_lines:
-                    cost_lines.append((0, 0, {
-                        'product_id': l.product_id.id,
-                        'name': l.product_id.name,
-                        'account_id': l.product_id.product_tmpl_id.get_product_accounts()['stock_input'].id,
-                        'price_unit': l.currency_id._convert(l.price_subtotal, l.company_currency_id, l.company_id,
-                                                             l.move_id.date),
-                        'split_method': 'equal',
-                    }))
 
             sltech_landed_costs_lines = self.sltech_move_line  # .filtered(lambda line: line.is_landed_costs_line)
             if self.sltech_move_line:
@@ -74,12 +74,12 @@ class AccountInvoice(models.Model):
                         'split_method': 'equal',
                     }))
 
-            landed_costs = self.env['stock.landed.cost'].create({
-                'vendor_bill_id': self.id,
-                'cost_lines': cost_lines,
-            })
-            action = self.env.ref('stock_landed_costs.action_stock_landed_cost').read()[0]
-            return dict(action, view_mode='form', res_id=landed_costs.id, views=[(False, 'form')])
+        landed_costs = self.env['stock.landed.cost'].create({
+            'vendor_bill_id': self.id,
+            'cost_lines': cost_lines,
+        })
+        action = self.env.ref('stock_landed_costs.action_stock_landed_cost').read()[0]
+        return dict(action, view_mode='form', res_id=landed_costs.id, views=[(False, 'form')])
 
     @api.depends('sltech_move_line.product_id', 'sltech_move_line.quantity', 'sltech_move_line.price_unit', 'state', 'invoice_payment_state')
     def _sltech_compute_all(self):
