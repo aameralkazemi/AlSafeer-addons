@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <report
+                id="acc_mv_line_report"
+                model="sltech.acc.move.line.report"
+                string="Print to XLSX"
+                report_type="xlsx"
+                name="sltech_account_move_line_report.acc_mv_line_report_name"
+                file="sltech_account_move_line_report.acc_mv_line_report_name"
+                attachment_use="False"
+                menu="True"
+        />
+    </data>
+</odoo>
