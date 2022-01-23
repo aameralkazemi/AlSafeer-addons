@@ -65,22 +65,22 @@ class SLtechAccountMoveLineXLSXReport(models.AbstractModel):
 
             worksheet = workbook.add_worksheet('Report')
 
-            worksheet.set_column('A:A', 10)
-            worksheet.set_column('B:B', 15)
-            worksheet.set_column('C:C', 10)
+            worksheet.set_column('A:A', 15)
+            worksheet.set_column('B:B', 18)
+            worksheet.set_column('C:C', 20)
             worksheet.set_column('D:D', 20)
-            worksheet.set_column('E:E', 8)
+            worksheet.set_column('E:E', 26)
             worksheet.set_column('F:F', 8)
-            worksheet.set_column('G:G', 12)
-            worksheet.set_column('H:H', 8)
-            worksheet.set_column('I:I', 10)
+            worksheet.set_column('G:G', 10)
+            worksheet.set_column('H:H', 6)
+            worksheet.set_column('I:I', 16)
             # worksheet.set_column('J:J', 10)
 
             row=1
 
             merge_format = workbook.add_format({'align': 'center', 'valign': 'vcenter', 'bold': 1, })
             worksheet.write('A1', 'invoice number', merge_format)
-            worksheet.write('B1', 'invoice number', merge_format)
+            worksheet.write('B1', 'invoice date', merge_format)
             worksheet.write('C1', 'client name', merge_format)
             worksheet.write('D1', 'product name', merge_format)
             worksheet.write('E1', 'product internal reference', merge_format)
@@ -97,7 +97,7 @@ class SLtechAccountMoveLineXLSXReport(models.AbstractModel):
 
             for inv_line in acc_move_line_ids:
                 worksheet.write(('A%s' % (str(row))), inv_line.move_id.name, col)
-                worksheet.write(('B%s' % (str(row))), inv_line.move_id.invoice_date, col)
+                worksheet.write(('B%s' % (str(row))), str(inv_line.move_id.invoice_date or ''), col)
                 worksheet.write(('C%s' % (str(row))), inv_line.move_id.partner_id.name, col)
                 worksheet.write(('D%s' % (str(row))), inv_line.product_id.name, col)
                 worksheet.write(('E%s' % (str(row))), inv_line.product_id.default_code, col)
