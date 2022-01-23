@@ -4,7 +4,7 @@ A module to implement ZATCA e-invoice (fatoora)
 more information @ https://zatca.gov.sa/ar/E-Invoicing/SystemsDevelopers/Pages/default.aspx
 """
 
-from uttlv import TLV
+# from uttlv import TLV
 import base64
 from hashlib import sha256
 import json
@@ -22,9 +22,9 @@ class Fatoora:
         invoice_date: str,
         total_amount: float,
         tax_amount: float,
-        tags: TLV = TLV(),
+        # tags: TLV = TLV(),
     ):
-        self.tags = tags
+        # self.tags = tags
         self.seller_name = seller_name
         self.tax_number = tax_number
         self.invoice_date = invoice_date
