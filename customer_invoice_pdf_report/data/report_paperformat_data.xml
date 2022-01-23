@@ -33,5 +33,7 @@
             <field name="dpi">90</field>
         </record>
 
+
+
     </data>
 </odoo>

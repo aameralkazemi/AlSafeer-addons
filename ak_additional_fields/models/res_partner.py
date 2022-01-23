@@ -9,8 +9,8 @@ class ResPartner(models.Model):
         if not args:
             args = []
         if name:
-            domain = ['|', '|', ('phone', operator, name),
-                      ('mobile', operator, name), ('partnerCode', operator, name)
+            domain = ['|', '|','|', ('phone', operator, name),
+                      ('mobile', operator, name), ('partnerCode', operator, name) , ('altName', operator, name)
                       ]
             partners = self.search(domain + args, limit=limit, )
             res = partners.name_get()

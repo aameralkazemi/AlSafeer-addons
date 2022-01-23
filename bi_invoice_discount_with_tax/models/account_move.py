@@ -161,14 +161,14 @@ class account_move(models.Model):
                     if rec.discount_type == 'line':
                         rec.discount_amt = 0.00
                         total = 0
-                        if self._context.get('default_type') in ('in_invoice','out_invoice'):
+                        if self._context.get('default_type') in ('in_invoice','out_invoice','out_refund','in_refund'):
                             for line in self.invoice_line_ids:
                                 if line.discount_method == 'per':
                                     total += line.price_total * (line.discount_amount/ 100)
                                 elif line.discount_method == 'fix':
                                     total += line.discount_amount
                             rec.discount_amt_line = total
-                        if self._context.get('default_type') == 'out_invoice':
+                        if self._context.get('default_type') in ('out_invoice','out_refund'):
                             if rec.discount_amount_line > 0.0:
                                 rec.discount_amt_line = rec.discount_amount_line
                         rec.amount_total = rec.amount_tax + rec.amount_untaxed - rec.discount_amt_line
@@ -191,7 +191,7 @@ class account_move(models.Model):
                     sums = 0.00
                     if rec.discount_type == 'line':
                         total = 0
-                        if self._context.get('default_type') in ('in_invoice','out_invoice'):
+                        if self._context.get('default_type') in ('in_invoice','out_invoice','out_refund','in_refund'):
 
                             for line in self.invoice_line_ids:
                                 if line.discount_method == 'per':
@@ -200,7 +200,7 @@ class account_move(models.Model):
                                     total += line.discount_amount
                             rec.discount_amt_line = total
 
-                        if self._context.get('default_type') == 'out_invoice' :
+                        if self._context.get('default_type') in ('out_invoice','out_refund') :
                             if rec.discount_amount_line > 0.0:
                                 rec.discount_amt_line = rec.discount_amount_line
 
@@ -246,7 +246,7 @@ class account_move(models.Model):
 
                 if rec.discount_type and (rec.discount_method in ["fix","per"] and rec.discount_amount != 0 \
                     or any(l.discount_method in ["fix","per"] and l.discount_amount > 0 for l in rec.invoice_line_ids)):
-                    if rec.type == 'out_invoice':
+                    if rec.type in ('out_invoice','out_refund'):
                         if res_config.sale_account_id:
                             rec.discount_account_id = res_config.sale_account_id.id
                             
@@ -258,7 +258,7 @@ class account_move(models.Model):
                             else:
                                 rec.discount_account_id = account_id.id
 
-                    if rec.type == 'in_invoice':
+                    if rec.type in ('in_invoice','in_refund'):
                         if res_config.purchase_account_id:
                             rec.discount_account_id = res_config.purchase_account_id.id
                         else:
@@ -434,7 +434,7 @@ class account_move(models.Model):
                 line.tax_exigible = tax_exigible
 
         # ==== Pre-process taxes_map ====
-        # taxes_map = self._preprocess_taxes_map(taxes_map)
+        taxes_map = self._preprocess_taxes_map(taxes_map)
 
         # ==== Process taxes_map ====
         for taxes_map_entry in taxes_map.values():
@@ -589,13 +589,13 @@ class account_move(models.Model):
             else:
                 price = 0
             for rec in self.line_ids:
-                if self._context.get('default_type') == 'out_invoice':
+                if self._context.get('default_type') in ('out_invoice','in_refund'):
                     if rec.name == "Discount":
                         rec.with_context(check_move_validity=False).write({'debit':price})
                     if rec.name == False or rec.name == '':
                         rec.with_context(check_move_validity=False).write({'debit':self.amount_total})
                 
-                elif self._context.get('default_type') == 'in_invoice':
+                elif self._context.get('default_type') in ('in_invoice','out_refund'):
                     if rec.name == "Discount":
                         rec.with_context(check_move_validity=False).write({'credit':price})
                     if rec.name == False or rec.name == '':

@@ -187,14 +187,20 @@
                         <td style="width: 18%;float: center" class="sltech-box-class">
                             <span>رقم الصنف</span>
                         </td>
-                        <td style="width: 52%" class="sltech-box-class">
-
+                        <td style="width: 26%" class="sltech-box-class">
+                            <span>البيان</span>
                         </td>
-                        <td style="width: 6%" class="sltech-box-class">
+                         <td style="width: 26%" class="sltech-box-class">
+                             <span>اسم الصنف</span>
+                        </td>
+                        <td style="width: 10%" class="sltech-box-class">
                             <span>الوحدة</span>
                         </td>
-                        <td style="width: 6%" class="sltech-box-class">
+                        <td style="width: 10%" class="sltech-box-class">
                             <span>الكمية</span>
+                        </td>
+                        <td style="width: 10%" class="sltech-box-class">
+                            <span>كرتون</span>
                         </td>
                     </tr>
                     <tr>
@@ -203,13 +209,18 @@
                         </td>
                         <td class="sltech-box-class">
                             <span>Description</span>
-                            <span style="float: right">البيان</span>
+                        </td>
+                        <td class="sltech-box-class">
+                            <span>Name</span>
                         </td>
                         <td class="sltech-box-class">
                             <span>Unit</span>
                         </td>
                         <td class="sltech-box-class">
                             <span>Qty.</span>
+                        </td>
+                        <td class="sltech-box-class">
+                            <span>Cartoon</span>
                         </td>
                     </tr>
                 </table>
@@ -219,14 +230,21 @@
                             <td style="width: 18%;">
                                 <span><t t-esc="line.product_id.default_code"/></span>
                             </td>
-                            <td style="width: 52%">
+                            <td style="width: 26%">
                                 <span><t t-esc="line.description_picking"/></span>
                             </td>
-                            <td style="width: 6%">
+                            <td style="width: 26%">
+                                <span><t t-esc="line.product_id.englishName"/></span>
+                            </td>
+                            <td style="width: 10%">
                                 <span><t t-esc="line.product_id.uom_id.name"/></span>
                             </td>
-                            <td style="width: 6%">
+                            <td style="width: 10%">
                                 <span><t t-esc="'%.2f'% line.quantity_done"/></span>
+                            </td>
+                            <td style="width: 10%">
+                                <t t-set= "factor" t-value="line.quantity_done/line.product_id.factor" > </t>
+                                <span><t t-esc="'%.2f'% factor "/></span>
                             </td>
                         </tr>
                     </t>

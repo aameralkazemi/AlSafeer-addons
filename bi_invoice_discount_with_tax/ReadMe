@@ -16,3 +16,7 @@ Version: 13.0.0.7 | 30/11/2021 :-
 	- In previous version warning on creating invoice from sale order and adding discount and posting it, solved that issue.
 	- Wrong discount amount calculation for line discount, solved that issue.
 	- In previous version wrong total tax calculation, after applying discount in invoice, solved that issue.
+
+13.0.0.8 ==>fixed issue of warning in credit note.
+
+13.0.0.9 ==>fixed issue of credit debit in credit note.

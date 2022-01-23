@@ -9,7 +9,8 @@
                 <field name="name" position="after">
                     <field name="phone" string="Phone" filter_domain="['|',('phone','ilike', self),('mobile','ilike', self)]"/>
                     <field name="partnerCode" string="Partner Code"  filter_domain="[('partnerCode','ilike', self)]"/>
-                 </field>
+                    <field name="altName" string="English Name"  filter_domain="[('partnerCode','ilike', self)]"/>
+                 </field>note
 
              </field>
         </record>

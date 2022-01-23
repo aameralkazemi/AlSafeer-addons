@@ -35,24 +35,11 @@ odoo.define("report_xlsx.report", function(require) {
             }
 
             return new Promise(function(resolve, reject) {
-
-                /* By Sachin Burnawal (7 line)*/
-                var data_list = [];
-//                if (action.context['from_date'] != undefined && action.context['to_date'] != undefined) {
-//                    data_list = [action.context];
-//                }
-                if (cloned_action.context != undefined) {
-                    data_list = [cloned_action.context];
-                }
-
                 var blocked = !session.get_file({
                     url: new_url,
                     data: {
-                    data: JSON.stringify([url,
-                                          type,
-                                          /*By Sachin Buranawal (1 line)*/
-                                          data_list,]),
-                },
+                        data: JSON.stringify([new_url, type]),
+                    },
                     success: resolve,
                     error: error => {
                         self.call("crash_manager", "rpc_error", error);

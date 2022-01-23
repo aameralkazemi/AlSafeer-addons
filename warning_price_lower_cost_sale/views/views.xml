@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+    <record id="x_price_below_cost" model="ir.ui.view">
+      <field name="name">sale.order.form</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//page[@name='order_lines']//tree[1]">
+          <field name="x_price_below_cost" invisible="1"/>
+        </xpath>
+        <xpath expr="//page[@name='order_lines']//tree[1]" position="attributes">
+          <attribute name="decoration-danger">(x_price_below_cost)</attribute>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
