@@ -1,0 +1,53 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ak_filter_by_customer_tag
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-27 08:41+0000\n"
+"PO-Revision-Date: 2022-01-27 08:41+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ak_filter_by_customer_tag
+#: model:ir.model,name:ak_filter_by_customer_tag.model_res_partner
+msgid "Contact"
+msgstr "جهة الاتصال"
+
+#. module: ak_filter_by_customer_tag
+#: model:ir.model.fields,field_description:ak_filter_by_customer_tag.field_purchase_order__area
+#: model:ir.model.fields,field_description:ak_filter_by_customer_tag.field_purchase_report__area
+#: model:ir.model.fields,field_description:ak_filter_by_customer_tag.field_res_partner__area
+#: model:ir.model.fields,field_description:ak_filter_by_customer_tag.field_res_users__area
+#: model:ir.model.fields,field_description:ak_filter_by_customer_tag.field_sale_order__area
+#: model:ir.model.fields,field_description:ak_filter_by_customer_tag.field_sale_report__area
+#: model_terms:ir.ui.view,arch_db:ak_filter_by_customer_tag.purchaseview_area_search
+#: model_terms:ir.ui.view,arch_db:ak_filter_by_customer_tag.saleview_search
+msgid "Customer type"
+msgstr "نوع العميل"
+
+#. module: ak_filter_by_customer_tag
+#: model:ir.model,name:ak_filter_by_customer_tag.model_purchase_order
+msgid "Purchase Order"
+msgstr "أمر شراء"
+
+#. module: ak_filter_by_customer_tag
+#: model:ir.model,name:ak_filter_by_customer_tag.model_purchase_report
+msgid "Purchase Report"
+msgstr "تقرير الشراء"
+
+#. module: ak_filter_by_customer_tag
+#: model:ir.model,name:ak_filter_by_customer_tag.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "تقرير المبيعات التحليلي"
+
+#. module: ak_filter_by_customer_tag
+#: model:ir.model,name:ak_filter_by_customer_tag.model_sale_order
+msgid "Sales Order"
+msgstr "أمر البيع"
