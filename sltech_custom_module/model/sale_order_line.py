@@ -29,6 +29,7 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('product_id')
     def product_id_change_vendor(self):
+        print('===================')
         domain = super(SaleOrderLine, self).product_id_change()
         if self.product_id and self.product_id.seller_ids:
             self.partner_id = self.product_id.seller_ids[0].name

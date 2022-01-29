@@ -89,11 +89,11 @@ class stock_location(models.Model):
         product_id = self._context.get('product_id', False)
         template_id = self._context.get('template_id', False)
         if product_id or template_id:
-            source = self.env['product.{}'.format('product' if product_id else 'template')].browse(
+            source = self.env['product.{}'.format('product' if product_id else 'template')].sudo().browse(
                 product_id if product_id else template_id
             )
             for rec in self:
-                by_locations = source.with_context(location=[rec.id])._product_available(False, False).get(source.id)
+                by_locations = source.sudo().with_context(location=[rec.id])._product_available(False, False).get(source.id)
                 for field in self._qty_fields:            
                     if field != "reserved_qty":
                         res.update({field: by_locations.get(field)})     
@@ -144,7 +144,30 @@ class stock_location(models.Model):
            *** level - level of hierarchy for interface purposes
            *** no_children - boolean (whether this location has shown children)
         """
-        elements = args.get("elements")
+        elements = []
+        location_ids = self.env["stock.location"].sudo().search([
+            ('usage', '=', 'internal'),
+            "|",
+            ('company_id', 'in', self.env['res.company'].sudo().search([]).ids),
+            ('company_id', '=', False),
+            "|",
+            ("active", "=", True),
+            ("active", "=", False),
+        ])
+        for loc in location_ids:
+            balances = loc._return_balances()
+            if balances:
+                elements.append({
+                    "name": loc.name,
+                    "id": loc.id,
+                    "qty_available": balances.get("qty_available"),
+                    "free_qty": balances.get("free_qty"),
+                    "reserved_qty": balances.get("reserved_qty"),
+                    "virtual_available": balances.get("virtual_available"),
+                    "incoming_qty": balances.get("incoming_qty"),
+                    "outgoing_qty": balances.get("outgoing_qty"),
+                })
+        # elements = args.get("elements")
         # 1
         clean_elements = []
         for elem in elements:

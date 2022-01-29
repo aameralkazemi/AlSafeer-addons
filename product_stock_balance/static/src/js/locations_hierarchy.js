@@ -53,10 +53,23 @@ odoo.define('product_stock_balance.locations_hierarchy', function (require) {
             }).then(function(widget_options) {
                 self.maxLevel = widget_options.max_level;
                 self.precisionLevel = widget_options.precision;
+
+                var context = {};
+                if (self.record.model == "product.template"){
+                    context = {
+                        'template_id': self.record.res_id
+                    }
+                } else if (self.record.model == "product.product"){
+                    context = {
+                        'product_id': self.record.res_id
+                    }
+                }
+
                 rpc.query({
                     model: 'stock.location',
                     method: 'prepare_elements_for_hierarchy',
                     args: [{"elements": resElements.elements,}],
+                    context: context
                 }).then(function(finalElements) {
                     def.resolve({
                         elements: finalElements,
