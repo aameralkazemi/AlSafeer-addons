@@ -164,20 +164,47 @@
                         <td colspan="4"/>
                         <td colspan="7">
                             <span>
-                                <t t-esc="o.partner_id.mobile"/>
+                                <t t-esc="o.partner_id.altName"/>
                             </span>
                         </td>
 <!--                        <td colspan="1"/>-->
                         <td colspan="7">
-                             <span>
+            
+                             <span >
                                 <t t-esc="o.partner_id.name"/>
                             </span>
+                       
+                    
                         </td>
 <!--                        <td colspan="2"/>-->
                         <td colspan="1" style="text-align: right">
                             <span>السادة</span>
                         </td>
                     </tr>
+                    <t t-if =" o.partner_id.phone" >
+                       <tr>
+                        <td >
+                            <span>Phone #</span>
+                        </td>
+                        <td colspan="4"/>
+                        <td>
+                            <span>
+                                <t t-esc="o.partner_id.mobile"/>
+                            </span>
+                        </td>
+                        <td colspan="10"/>
+                        <td colspan="3">
+                             <span>
+                                <t t-esc="o.partner_id.mobile"/>
+                            </span>
+                        </td>
+                        <td style="text-align: right">
+                            <span>رقم الجوال</span>
+                        </td>
+                    </tr>
+                    </t>
+
+                    <t t-if ="o.partner_id.street" >
                     <tr>
                         <td >
                             <span>Address</span>
@@ -198,6 +225,9 @@
                             <span>العنوان</span>
                         </td>
                     </tr>
+
+                    </t>
+
                     <tr>
                         <td>
                             <span>VAT #</span>
@@ -310,10 +340,19 @@
                         <td style="width: 18%;float: center" class="sltech-full-border sltech-top sltech-left sltech-right">
                             <span>رقم الصنف</span>
                         </td>
-                        <td style="width: 52%" class="sltech-full-border sltech-top sltech-right"></td>
+                        <td style="width: 26%" class="sltech-full-border sltech-top sltech-right">
+                            <span>الشرح</span>
+                        </td>
+                      
+                    
+                        <td style="width: 26%" class="sltech-full-border sltech-top sltech-right">
+                            <span></span>
+                        </td>
+
                         <td style="width: 6%" class="sltech-full-border sltech-top sltech-right">
                             <span>الوحدة</span>
                         </td>
+
                         <td style="width: 6%" class="sltech-full-border sltech-top sltech-right">
                             <span>الكمية</span>
                         </td>
@@ -330,8 +369,10 @@
                             <span>Reference</span>
                         </td>
                         <td class="sltech-full-border sltech-bottom sltech-right">
+                            <span></span>
+                        </td>
+                        <td class="sltech-full-border sltech-bottom sltech-right">
                             <span>Description</span>
-                            <span style="float: right">البيان</span>
                         </td>
                         <td class="sltech-full-border sltech-bottom sltech-right">
                             <span>Unit</span>
@@ -355,8 +396,11 @@
                             <td style="width: 18%;">
                                 <span><t t-esc="line.product_id.default_code"/></span>
                             </td>
-                            <td style="width: 52%">
+                            <td style="width: 26%">
                                 <span><t t-esc="line.product_id.name"/></span>
+                            </td>
+                            <td style="width: 26%">
+                                <span><t t-esc="line.product_id.englishName"/></span>
                             </td>
                             <td style="width: 6%">
                                 <span><t t-esc="line.product_uom_id.name"/></span>

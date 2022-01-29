@@ -15,7 +15,6 @@
     'views/altNameView.xml',
     'views/productTemplateView.xml',
     'views/customer_search.xml',
-    'views/qty_on_hand.xml',
     "views/company_view.xml",
 
 
