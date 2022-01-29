@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="locationsHierarchyWidget">
+        <div class="table-responsive">
+            <t t-if="elements.length == 0">
+                <p>
+                    <i> ...locations for this product are not found</i>
+                </p>
+            </t>
+            <t t-else="">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="active">
+                            <th name="th_location">
+                                <a>
+                                    <span class="fa fa-angle-double-down text-info o_expand_all"
+                                      title="Expand all levels"
+                                    />
+                                </a>
+                                Location
+                            </th>
+                            <th name="th_onhand">On hand</th>
+                            <th name="th_free_to_use">Free To Use</th>
+                            <th name="th_reserved">Reserved</th>
+                            <th name="th_forecast">Forecast</th>
+                            <th name="th_incom">Incoming</th>
+                            <th name="th_out">Outgoing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="elements" t-as="el">
+                            <tr class="o_data_row text-default tr_location_class"
+                                t-att-data-id="el.id"
+                                t-attf-level="#{el.level}"
+                                t-attf-location="#{el.location_id}"
+                            >
+                                <td name="td_location"
+                                    t-attf-style="padding-left:#{el.level * 15}px;"
+                                    class="o_data_cell"
+                                >
+                                    <span t-attf-class="fa fa-chevron-up text-info o_hide #{((el.no_children) ? 'psb_hidden' : '')}"
+                                          t-attf-location="#{el.location_id}"
+                                          t-attf-id="#{el.id}"
+                                    />
+                                    <span t-attf-class="fa fa-angle-right #{((!el.no_children) ? 'psb_hidden' : '')}"/>
+                                    <t t-esc="el.name"/>
+                                </td>
+                                <td name="td_onhand">
+                                    <t t-esc="widget.formatFieldFloat(el.qty_available)"/>
+                                </td>
+                                <td name="td_free_to_use">
+                                    <t t-esc="widget.formatFieldFloat(el.free_qty)"/>
+                                </td>
+                                <td name="td_reserved">
+                                    <t t-esc="widget.formatFieldFloat(el.reserved_qty)"/>
+                                </td>
+                                <td name="td_forecast">
+                                    <t t-esc="widget.formatFieldFloat(el.virtual_available)"/>
+                                </td>
+                                <td name="td_incom">
+                                    <t t-esc="widget.formatFieldFloat(el.incoming_qty)"/>
+                                </td>
+                                <td name="td_out">
+                                    <t t-esc="widget.formatFieldFloat(el.outgoing_qty)"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+        </div>
+    </t>
+
+    <div t-name="saleLineByLocations">
+        <div t-att-class="!widget.data.product_id ? 'd-none' : ''">
+            <a tabindex="0" 
+               class="fa fa-list"
+            />
+        </div>
+    </div>
+
+</templates>

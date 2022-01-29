@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.product.stock.balance</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='stock']" position="inside">
+                <h2>Stocks by Locations</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div name="st_b_l_option1" class="o_setting_left_pane">
+                            <field name="group_stocks_show_only_by_button"
+                                   class="o_light_label"
+                            />
+                        </div>
+                        <div class="o_setting_right_pane" id="stocks_locations_group">
+                            <label for="group_stocks_show_only_by_button"/>
+                            <div class="text-muted">
+                                If checked, the table of stocks by locations would be not shown on product forms.
+                                The button to open the table would be shown instead. Such approach allows
+                                to facilitate loading of product forms, since compute methods would be applied only
+                                after pushing the above button.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div name="st_b_l_option1" class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane" id="stocks_locations_group">
+                            <label for="product_stock_balance_default_levels"/>
+                            <div class="text-muted">
+                                Define how many levels of locations' hierarchy is shown by default (others would be 
+                                hidden until not expanded manually). '1' - only the first level of locaions' hierarchy
+                                is shown. 
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="product_stock_balance_default_levels"
+                                           class="o_light_label"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

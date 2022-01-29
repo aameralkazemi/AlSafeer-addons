@@ -295,7 +295,7 @@
 
                     <tr t-if="not o.type == 'out_refund'">
                         <td>
-                            <span>Delivery Note No</span>
+                            <span>Delivery #</span>
                         </td>
                         <td colspan="4"/>
                         <td>

@@ -1,0 +1,12 @@
+<odoo>
+
+    <template id="assets_backend" name="list asssets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/product_stock_balance/static/src/js/locations_hierarchy.js"/>
+            <script type="text/javascript" src="/product_stock_balance/static/src/js/location_formview.js"/>
+            <script type="text/javascript" src="/product_stock_balance/static/src/js/sale_line_qty_by_locations.js"></script>
+            <link type="text/css" rel='stylesheet' href='/product_stock_balance/static/src/css/locations_hierarchy.css'/>
+        </xpath>
+    </template>
+
+</odoo>

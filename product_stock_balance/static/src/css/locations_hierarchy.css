@@ -1,0 +1,9 @@
+.psb_hidden {
+    display: none;
+}
+.o_hide {
+	cursor: pointer;
+}
+.o_expand_all {
+	cursor: pointer;
+}
