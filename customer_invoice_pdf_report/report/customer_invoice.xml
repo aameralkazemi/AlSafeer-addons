@@ -181,7 +181,7 @@
                             <span>السادة</span>
                         </td>
                     </tr>
-                    <t t-if =" o.partner_id.phone" >
+                    <t t-if =" o.partner_id.mobile" >
                        <tr>
                         <td >
                             <span>Phone #</span>
