@@ -13,5 +13,6 @@ class Partnerpage(models.Model):
 
 class drivername(models.Model):
     _inherit= 'stock.picking'
+    
     driver_name = fields.Char(string= "Driver Name")
 

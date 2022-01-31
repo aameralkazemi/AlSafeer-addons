@@ -24,6 +24,6 @@
 
     # always loaded
     'data': [
-    
+        'views/views.xml',
     ],
 }
