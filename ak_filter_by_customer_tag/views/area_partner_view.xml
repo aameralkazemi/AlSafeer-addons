@@ -95,4 +95,15 @@
         </field>
     </record>
 
+    <record id="invoiceview_search" model="ir.ui.view">
+        <field name="name">view.invoice.add.area</field>
+        <field name="model">account.invoice.report</field>
+        <field name="inherit_id" ref="account.view_account_invoice_report_search"/>
+        <field name="arch" type="xml">
+            <filter name="category_product" position="after">
+                <filter string="Customer type" name="area" context="{'group_by':'area'}"/>
+            </filter>
+        </field>
+    </record>
+
 </odoo>

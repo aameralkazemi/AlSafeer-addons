@@ -48,6 +48,18 @@ class SaleReport(models.Model):
         return super(SaleReport, self)._query(with_clause, fields, groupby, from_clause)
 
 
+class InvoiceReport(models.Model):
+    _inherit = "account.invoice.report"
+
+    area = fields.Char(string="Customer type", readonly=True)
+
+    def _select(self):
+        return super(InvoiceReport, self)._select() + ", partner.area as area"
+
+    def _group_by(self):
+        return super(InvoiceReport, self)._group_by() + ", partner.area"
+
+
 #
 # class SaleReport(models.Model):
 #     _inherit = "sale.report"
