@@ -422,12 +422,15 @@
                 <div class="footer">
                     <table style="border: 1px solid black; width: 100%">
 
-                        <tr>
-                            <td/>
-                            <td/>
-                            <td/>
+                     <tr>
+                            <td colspan="3">
+                                <span style= "font-size:14px ">Note: </span>
+                                    <span style= "font-size:12px; color : blue ">
+                                        <t t-esc="o.narration"/>
+                                    </span>
+                            </td>
                             <td>
-                                <span style="float: right">Discount</span>
+                                <span style = "float: right">Discount</span>
                                 <span style="float: right">الخصم</span>
                             </td>
                             <td>&amp;nbsp;</td>
@@ -438,6 +441,7 @@
                                 </span>
                             </td>
                         </tr>
+
                         <tr>
                             <td/>
                             <td/>
