@@ -25,7 +25,7 @@
     'company': 'SL TECH ERP SOLUTION',
     'website': 'https://www.sltecherpsolution.com',
 
-     'depends': ['purchase', 'sale', 'product_stock_balance'],
+     'depends': ['purchase', 'sale', 'product_stock_balance', 'account_reports'],
 
      'data': [
          'security/res_groups.xml',

@@ -28,7 +28,7 @@ class SaleOrderLine(models.Model):
     partner_id = fields.Many2one('res.partner', string='Vendor Name', store=True)
 
     @api.onchange('product_id')
-    def product_id_change_vendor(self):
+    def product_id_change(self):
         print('===================')
         domain = super(SaleOrderLine, self).product_id_change()
         if self.product_id and self.product_id.seller_ids:
