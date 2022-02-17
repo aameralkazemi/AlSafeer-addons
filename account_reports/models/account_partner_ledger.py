@@ -147,11 +147,13 @@ class ReportPartnerLedger(models.AbstractModel):
                 'sum'                               AS key,
                 SUM(ROUND(account_move_line.debit * currency_table.rate, currency_table.precision))   AS debit,
                 SUM(ROUND(account_move_line.credit * currency_table.rate, currency_table.precision))  AS credit,
+                SUM(ROUND(account_move_line.amount_currency, currency_table.precision))   AS amount_currency,
+                account_move_line.currency_id as always_set_currency_id,
                 SUM(ROUND(account_move_line.balance * currency_table.rate, currency_table.precision)) AS balance
             FROM %s
             LEFT JOIN %s ON currency_table.company_id = account_move_line.company_id
             WHERE %s
-            GROUP BY account_move_line.partner_id
+            GROUP BY account_move_line.partner_id,account_move_line.currency_id
         ''' % (tables, ct_query, where_clause))
 
         # Get sums for the initial balance.
@@ -165,11 +167,13 @@ class ReportPartnerLedger(models.AbstractModel):
                 'initial_balance'                   AS key,
                 SUM(ROUND(account_move_line.debit * currency_table.rate, currency_table.precision))   AS debit,
                 SUM(ROUND(account_move_line.credit * currency_table.rate, currency_table.precision))  AS credit,
+                SUM(ROUND(account_move_line.amount_currency, currency_table.precision))   AS amount_currency,
+                account_move_line.currency_id as always_set_currency_id,
                 SUM(ROUND(account_move_line.balance * currency_table.rate, currency_table.precision)) AS balance
             FROM %s
             LEFT JOIN %s ON currency_table.company_id = account_move_line.company_id
             WHERE %s
-            GROUP BY account_move_line.partner_id
+            GROUP BY account_move_line.partner_id,account_move_line.currency_id
         ''' % (tables, ct_query, where_clause))
 
         return ' UNION ALL '.join(queries), params
@@ -308,7 +312,7 @@ class ReportPartnerLedger(models.AbstractModel):
     ####################################################
 
     @api.model
-    def _get_report_line_partner(self, options, partner, initial_balance, debit, credit, balance):
+    def _get_report_line_partner(self, options, partner, initial_balance, debit, credit, amount_currency, always_set_currency_id, balance):
         company_currency = self.env.company.currency_id
         unfold_all = self._context.get('print_mode') and not options.get('unfolded_lines')
 
@@ -318,8 +322,14 @@ class ReportPartnerLedger(models.AbstractModel):
             {'name': self.format_value(credit), 'class': 'number'},
         ]
         if self.user_has_groups('base.group_multi_currency'):
-            columns.append({'name': ''})
+
+            currency = self.env['res.currency'].browse(always_set_currency_id)
+            formatted_amount = self.format_value(amount_currency, currency=currency, blank_if_zero=True)
+            columns.append({'name': formatted_amount, 'class': 'number'})
+
+            # columns.append({'name': self.format_value(amount_currency), 'class': 'number'})
         columns.append({'name': self.format_value(balance), 'class': 'number'})
+
 
         return {
             'id': 'partner_%s' % partner.id,
@@ -387,15 +397,21 @@ class ReportPartnerLedger(models.AbstractModel):
         }
 
     @api.model
-    def _get_report_line_total(self, options, initial_balance, debit, credit, balance):
+    def _get_report_line_total(self, options, initial_balance, debit, credit, amount_currency, always_set_currency_id, balance):
         columns = [
             {'name': self.format_value(initial_balance), 'class': 'number'},
             {'name': self.format_value(debit), 'class': 'number'},
             {'name': self.format_value(credit), 'class': 'number'},
         ]
         if self.user_has_groups('base.group_multi_currency'):
-            columns.append({'name': ''})
+            if len(options['selected_partner_ids']) == 1:
+                currency = self.env['res.currency'].browse(always_set_currency_id)
+                formatted_amount = self.format_value(amount_currency, currency=currency, blank_if_zero=True)
+                columns.append({'name': formatted_amount, 'class': 'number'})
+            else:
+                columns.append({'name': ''})
         columns.append({'name': self.format_value(balance), 'class': 'number'})
+
         return {
             'id': 'partner_ledger_total_%s' % self.env.company.id,
             'name': _('Total'),
@@ -417,7 +433,8 @@ class ReportPartnerLedger(models.AbstractModel):
         expanded_partner = line_id and self.env['res.partner'].browse(int(line_id[8:]))
         partners_results = self._do_query(options, expanded_partner=expanded_partner)
 
-        total_initial_balance = total_debit = total_credit = total_balance = 0.0
+        total_initial_balance = total_debit = total_credit = total_amount_currency = total_balance = 0.0
+        total_currency_id = ''
         for partner, results in partners_results:
             is_unfolded = 'partner_%s' % partner.id in options['unfolded_lines']
 
@@ -428,13 +445,18 @@ class ReportPartnerLedger(models.AbstractModel):
             initial_balance = partner_init_bal.get('balance', 0.0)
             debit = partner_sum.get('debit', 0.0)
             credit = partner_sum.get('credit', 0.0)
-            balance = initial_balance + partner_sum.get('balance', 0.0)
+            amount_currency = partner_sum.get('amount_currency', 0.0)
 
-            lines.append(self._get_report_line_partner(options, partner, initial_balance, debit, credit, balance))
+            balance = initial_balance + partner_sum.get('balance', 0.0)
+            always_set_currency_id = partner_sum.get('always_set_currency_id')
+
+            lines.append(self._get_report_line_partner(options, partner, initial_balance, debit, credit, amount_currency, always_set_currency_id, balance))
 
             total_initial_balance += initial_balance
             total_debit += debit
             total_credit += credit
+            total_amount_currency += amount_currency
+            total_currency_id = always_set_currency_id
             total_balance += balance
 
             if unfold_all or is_unfolded:
@@ -475,7 +497,10 @@ class ReportPartnerLedger(models.AbstractModel):
                 total_initial_balance,
                 total_debit,
                 total_credit,
+                total_amount_currency,
+                total_currency_id,
                 total_balance
+
             ))
         return lines
 
