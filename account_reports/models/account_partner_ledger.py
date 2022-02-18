@@ -312,7 +312,7 @@ class ReportPartnerLedger(models.AbstractModel):
     ####################################################
 
     @api.model
-    def _get_report_line_partner(self, options, partner, initial_balance, debit, credit, balance, amount_currency, always_set_currency_id):
+    def _get_report_line_partner(self, options, partner, initial_balance, debit, credit, balance, amount_currency='', always_set_currency_id=False):
         company_currency = self.env.company.currency_id
         unfold_all = self._context.get('print_mode') and not options.get('unfolded_lines')
 
@@ -322,9 +322,9 @@ class ReportPartnerLedger(models.AbstractModel):
             {'name': self.format_value(credit), 'class': 'number'},
         ]
         if self.user_has_groups('base.group_multi_currency'):
-
-            currency = self.env['res.currency'].browse(always_set_currency_id)
-            formatted_amount = self.format_value(amount_currency, currency=currency, blank_if_zero=True)
+            if always_set_currency_id:
+                currency = self.env['res.currency'].browse(always_set_currency_id)
+                formatted_amount = self.format_value(amount_currency, currency=currency, blank_if_zero=True)
             columns.append({'name': formatted_amount, 'class': 'number'})
 
             # columns.append({'name': self.format_value(amount_currency), 'class': 'number'})
