@@ -312,7 +312,7 @@ class ReportPartnerLedger(models.AbstractModel):
     ####################################################
 
     @api.model
-    def _get_report_line_partner(self, options, partner, initial_balance, debit, credit, amount_currency, always_set_currency_id, balance):
+    def _get_report_line_partner(self, options, partner, initial_balance, debit, credit, balance, amount_currency, always_set_currency_id):
         company_currency = self.env.company.currency_id
         unfold_all = self._context.get('print_mode') and not options.get('unfolded_lines')
 
@@ -450,7 +450,7 @@ class ReportPartnerLedger(models.AbstractModel):
             balance = initial_balance + partner_sum.get('balance', 0.0)
             always_set_currency_id = partner_sum.get('always_set_currency_id')
 
-            lines.append(self._get_report_line_partner(options, partner, initial_balance, debit, credit, amount_currency, always_set_currency_id, balance))
+            lines.append(self._get_report_line_partner(options, partner, initial_balance, debit, credit, balance, amount_currency, always_set_currency_id))
 
             total_initial_balance += initial_balance
             total_debit += debit
