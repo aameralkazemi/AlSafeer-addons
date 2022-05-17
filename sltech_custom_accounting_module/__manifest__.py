@@ -36,6 +36,7 @@
         'security/ir.model.access.csv',
         'views/product_template.xml',
         'views/account_move.xml',
+        'views/account_payment.xml',
     ],
     'qweb': [
     ],
