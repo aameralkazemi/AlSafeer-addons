@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_order_form_inherit_sale_order" model="ir.ui.view">
+            <field name="name">sale.order.line.tree.sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <button name="action_confirm" position="replace">
+                    <button name="sltech_action_confirm"
+                            type="object"
+                            string="Confirm"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                </button>
+                <button name="action_confirm" position="replace"/>
+            </field>
+        </record>
+    </data>
+</odoo>
